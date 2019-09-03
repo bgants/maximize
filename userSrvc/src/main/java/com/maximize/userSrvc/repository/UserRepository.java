@@ -1,0 +1,8 @@
+package com.maximize.userSrvc.repository;
+
+import com.maximize.userSrvc.model.User;
+import org.springframework.data.repository.CrudRepository;
+
+public interface UserRepository extends CrudRepository<User, Long> {
+    User findByUserName(String username);
+}

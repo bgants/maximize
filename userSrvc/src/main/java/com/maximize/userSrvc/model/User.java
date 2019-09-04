@@ -15,4 +15,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String userName;
+
+    public User withId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public User withUserName(String userName) {
+        this.userName = userName;
+        return this;
+    }
 }

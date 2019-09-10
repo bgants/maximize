@@ -8,4 +8,4 @@ spring:
     config:
       server:
         native:
-          searchLocations: file:///home/bgants/projects/maximize/configSrvc/src/main/resources/config/userservice
+          searchLocations: file:///home/bgants/projects/maximize/configs

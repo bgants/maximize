@@ -1,0 +1,11 @@
+server:
+  port:  8889
+
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: file:///home/bgants/projects/maximize/configSrvc/src/main/resources/config/userservice

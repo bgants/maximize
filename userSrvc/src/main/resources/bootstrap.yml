@@ -1,7 +1,6 @@
-server:
-  port: 8089
-
 spring:
+  application:
+    name: userservice
   profiles:
     active: native
   cloud:

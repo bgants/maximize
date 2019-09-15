@@ -6,6 +6,6 @@ spring:
     config:
       server:
        git:
-         uri: https://github.com/bgants/maximize-configs.git
+         uri: https://github.com/bgants/maximize-configs
          force-pull: true
 

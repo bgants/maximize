@@ -26,7 +26,7 @@ services:
       - configsrvc
       - postgres
     ports:
-      - "8089:8889"
+      - "8089:8089"
     dns_search: "."
     environment:
       - spring.profiles.active=native

@@ -1,0 +1,36 @@
+version : "3.7"
+services:
+  postgres:
+    image: "postgres:latest"
+    ports:
+      - "5432:5432"
+    dns_search: "."
+    volumes:
+      - db-volume:/var/lib/postgresql/data:rw
+
+  configsrvc:
+    image: "maximize/configsrvc"
+    environment:
+      - spring.profiles.active=native
+      - spring.cloud.config.server.native.searchLocations=file:/tmp/max/config
+    volumes:
+      # This exits so we can mount this folder in the container & not use github
+      - /home/bgants/projects/maximize-configs:/tmp/max/config
+    ports:
+      - "8888:8888"
+    dns_search: "."
+
+  usersrvc:
+    image: "maximize/usersrvc"
+    depends_on:
+      - configsrvc
+      - postgres
+    ports:
+      - "8089:8889"
+    dns_search: "."
+    environment:
+      - spring.profiles.active=native
+      - spring.cloud.config.uri=http://configsrvc:8888
+volumes:
+  db-volume:
+

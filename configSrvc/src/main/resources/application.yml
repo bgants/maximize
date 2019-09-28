@@ -1,11 +1,12 @@
 server:
-  port:  8888
+  port: 8888
 
 spring:
   cloud:
     config:
       server:
        git:
-         uri: https://github.com/bgants/maximize-configs
+         #uri: https://github.com/bgants/maximize-configs
+         uri: file:://tmp/max/config/
          force-pull: true
 

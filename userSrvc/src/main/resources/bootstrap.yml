@@ -7,4 +7,7 @@ spring:
     config:
       name: userservice
       enabled: true
-      uri: http://localhost:8888
+      uri: http://localhost:8888/
+      failFast: true
+      retry:
+        maxAttempts: 20

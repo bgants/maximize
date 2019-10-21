@@ -5,7 +5,7 @@ spring:
     config:
       discovery:
         enabled: true
-        service-id: user
+        service-id: config-service
     failFast: true
     retry:
       maxAttempts: 20

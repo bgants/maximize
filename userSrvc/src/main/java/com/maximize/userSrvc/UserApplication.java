@@ -5,7 +5,9 @@ import com.maximize.userSrvc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -13,6 +15,8 @@ import java.util.List;
 
 
 @SpringBootApplication
+@EnableAutoConfiguration
+@EnableDiscoveryClient
 public class UserApplication {
 
 	public static void main(String[] args) {

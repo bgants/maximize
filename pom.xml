@@ -20,6 +20,7 @@
   <modules>
     <module>userSrvc</module>
     <module>configSrvc</module>
+    <module>discoverySrvc</module>
   </modules>
   <build>
     <plugins>

@@ -1,21 +1,27 @@
 version : "3.7"
 services:
   postgres:
-    image: "postgres:latest"
+    image: "maximize/postgres"
     ports:
       - "5432:5432"
     dns_search: "."
     volumes:
       - db-volume:/var/lib/postgresql/data:rw
 
+  discoverysrvc:
+    image: "maximize/discoverysrvc"
+    environment:
+      - spring.profiles.active=native
+      - eureka.instance.hostName=discoverysrvc
+      - eureka.instance.preferIpAddress=false
+    ports:
+      - "8761:8761"
+    dns_search: "."
+
   configsrvc:
     image: "maximize/configsrvc"
     environment:
-      - spring.profiles.active=native
-      - spring.cloud.config.server.native.searchLocations=file:/tmp/max/config
-    volumes:
-      # This exits so we can mount this folder in the container & not use github
-      - /home/bgants/projects/maximize-configs:/tmp/max/config
+      - eureka.client.service-url.defaultZone=http://discoverysrvc:8761/eureka
     ports:
       - "8888:8888"
     dns_search: "."
@@ -25,12 +31,13 @@ services:
     depends_on:
       - configsrvc
       - postgres
+      - activemq
     ports:
       - "8089:8089"
     dns_search: "."
     environment:
-      - spring.profiles.active=native
-      - spring.cloud.config.uri=http://configsrvc:8888
+      - spring.cloud.config.uri=http://configsrvc:8888/
+      - eureka.client.service-url.defaultZone=http://discoverysrvc:8761/eureka
 
   activemq:
     image: webcenter/activemq 
@@ -46,4 +53,3 @@ services:
 
 volumes:
   db-volume:
-

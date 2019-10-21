@@ -18,9 +18,9 @@
     <version>2.1.6.RELEASE</version>
   </parent>
   <modules>
-    <module>userSrvc</module>
-    <module>configSrvc</module>
-    <module>discoverySrvc</module>
+    <module>user-service</module>
+    <module>config-service</module>
+    <module>discovery-service</module>
   </modules>
   <build>
     <plugins>

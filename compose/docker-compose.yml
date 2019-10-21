@@ -8,36 +8,36 @@ services:
     volumes:
       - db-volume:/var/lib/postgresql/data:rw
 
-  discoverysrvc:
-    image: "maximize/discoverysrvc"
+  discovery-service:
+    image: "maximize/discovery-service"
     environment:
       - spring.profiles.active=native
-      - eureka.instance.hostName=discoverysrvc
+      - eureka.instance.hostName=discovery-service
       - eureka.instance.preferIpAddress=false
     ports:
       - "8761:8761"
     dns_search: "."
 
-  configsrvc:
-    image: "maximize/configsrvc"
+  config-service:
+    image: "maximize/config-service"
     environment:
-      - eureka.client.service-url.defaultZone=http://discoverysrvc:8761/eureka
+      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka
     ports:
       - "8888:8888"
     dns_search: "."
 
-  usersrvc:
-    image: "maximize/usersrvc"
+  user-service:
+    image: "maximize/user-service"
     depends_on:
-      - configsrvc
+      - config-service
       - postgres
       - activemq
     ports:
       - "8089:8089"
     dns_search: "."
     environment:
-      - spring.cloud.config.uri=http://configsrvc:8888/
-      - eureka.client.service-url.defaultZone=http://discoverysrvc:8761/eureka
+      - spring.cloud.config.uri=http://config-service:8888/
+      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka
 
   activemq:
     image: webcenter/activemq 

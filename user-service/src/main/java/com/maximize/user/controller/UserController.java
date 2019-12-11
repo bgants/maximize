@@ -1,5 +1,7 @@
 package com.maximize.user.controller;
 
+import com.maximize.user.messaging.MessagingService;
+import com.maximize.user.messaging.UserMessage;
 import com.maximize.user.model.User;
 import com.maximize.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +15,15 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    MessagingService userMessagingService;
+
     @PostMapping("/user")
     @ResponseStatus(HttpStatus.CREATED)
     public User addUser(@RequestBody User user) {
+        UserMessage message = new UserMessage();
+        message.setMessage("Hello from userService");
+        userMessagingService.sendUserMessage(message);
         return userRepository.save(user);
     }
 

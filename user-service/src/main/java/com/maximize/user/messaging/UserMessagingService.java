@@ -15,6 +15,6 @@ public class UserMessagingService implements MessagingService {
 
     @Override
     public void sendUserMessage(UserMessage userMessage) {
-        jms.convertAndSend("user.queue",userMessage);
+        jms.convertAndSend("user.topic",userMessage);
     }
 }

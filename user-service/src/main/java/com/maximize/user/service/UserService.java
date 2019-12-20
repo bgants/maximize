@@ -19,11 +19,13 @@ public class UserService {
     @Transactional
     //https://dzone.com/articles/transaction-synchronization-and-spring-application
     public User saveUser(User user) {
+        User newUser =  userRepository.save(user);
+
         UserMessage message = new UserMessage();
-        message.setMessage("Hello from userService");
+        message.setMessage("User " + newUser.getUserName() + " created");
         userMessagingService.sendUserMessage(message);
 
-        return userRepository.save(user);
+        return newUser;
     }
 
     public Iterable<User> getUsers()  {

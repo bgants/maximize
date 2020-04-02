@@ -20,6 +20,8 @@ services:
 
   config-service:
     image: "maximize/config-service"
+    depends_on:
+      - discovery-service 
     environment:
       - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka
     ports:
@@ -29,6 +31,7 @@ services:
   user-service:
     image: "maximize/user-service"
     depends_on:
+      - discovery-service 
       - config-service
       - postgres
       - activemq
